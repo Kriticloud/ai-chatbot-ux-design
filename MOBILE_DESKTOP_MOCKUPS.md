@@ -1,47 +1,36 @@
-# MOBILE & DESKTOP MOCKUPS
+# MOBILE DESKTOP MOCKUPS
 
-## Comprehensive Mockup Specifications
+## Detailed Mobile and Desktop Layouts
 
-### Mobile Mockup Specifications
+### Mobile Layout
+- **Header**: Contains the app logo, title, and a hamburger menu icon.
+- **Navigation**: Bottom navigation bar with icons for Home, Search, Notifications, and Profile.
+- **Content Area**: Dynamic area where content is displayed depending on the user's interaction.
+- **Footer**: Quick links to Terms and Conditions, Privacy Policy, and Contact Us.
 
-#### Layouts
-- **Header**: Fixed header with branding on the left and navigation links on the right.
-- **Body**: Single column layout with scrolling content.
-- **Footer**: Sticky footer with key action buttons (e.g., 'Submit', 'Cancel').
+### Desktop Layout
+- **Header**: Expanded version with a logo on the left, menu items (Home, Search, About, Contact) centrally aligned, and user profile options on the right.
+- **Sidebar**: Permanent sidebar for quick access to key functionality and user options.
+- **Content Area**: A larger space for displaying content, can include side panels for additional information or ads.
+- **Footer**: Similar to mobile, with links to Terms and Conditions, Privacy Policy, and Contact Us but more spaced out.
 
-#### Component Specifications
-- **Buttons**: Round edges with primary color background; hover state changes to a lighter shade.
-- **Forms**: Input fields with placeholder text; labels float above when focused.
+## State Variations
 
-#### Interaction Patterns
-- **Gestures**: Support tap, double-tap, and long press interactions.
-- **Navigation**: Swipe left/right to navigate between sections.
+### Mobile States
+- **Default State**: The typical view the user sees.
+- **Empty State**: Displays a message to encourage user interaction (e.g., "No messages yet").
+- **Loading State**: Greyed-out layout with skeleton loaders.
 
-#### Responsive Design Breakpoints
-- **320px**: Mobile portrait
-- **480px**: Mobile landscape
+### Desktop States
+- **Default State**: Similar to mobile but with more information displayed.
+- **Error State**: An error message displayed prominently, with options to retry.
+- **Loading State**: Spinner or progress bar shown at the top, preventing user interactions until loading is complete.
 
-### Desktop Mockup Specifications
+## Interaction Patterns
+- **Button Interactions**: Buttons provide visual feedback when active/inactive. Color changes to indicate selection.
+- **Navigation**: Mobile requires swipe gestures; desktop uses hover interactions for dropdown menus.
 
-#### Layouts
-- **Header**: Full-width header with logo, navigation bar, and search bar.
-- **Body**: 2 or 3-column layouts that adapt based on content.
-- **Footer**: Full-width footer with links categorized by topic.
-
-#### Component Specifications
-- **Buttons**: Square edges; primary buttons are highlighted with a dark background.
-- **Modals**: Center-aligned with dimmed background when active.
-
-#### Interaction Patterns
-- **Mouse Events**: Click, hover, and double-click interactions.
-- **Keyboard Shortcuts**: Implement shortcuts for primary actions.
-
-#### Responsive Design Breakpoints
-- **768px**: Tablet portrait
-- **1024px**: Tablet landscape
-- **1280px**: Small desktop
-
-### Visual Hierarchy Guidelines
-- **Headings**: Use H1 for main titles, H2 for section titles, and H3 for subsections.
-- **Colors**: Utilize a defined color palette; contrast for readability.
-- **Spacing**: Ensure consistent use of padding and margins for each component.
+## Visual Specifications
+- **Color Palette**: Primary color #3498db, Secondary color #2ecc71, Accent color #e74c3c.
+- **Typography**: Headings in "Roboto Bold", body text in "Roboto Regular".
+- **Iconography**: Use of Material Icons for scalable vector graphics, ensuring responsiveness across device sizes.
