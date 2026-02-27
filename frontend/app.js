@@ -46,15 +46,29 @@ function renderReminders(reminders) {
   reminders.forEach((reminder) => {
     const li = document.createElement("li");
     li.className = "reminder-item";
-    li.innerHTML = `
-      <div>
-        <strong>${reminder.title}</strong>
-        <div class="muted">${new Date(reminder.reminderTime).toLocaleString()}</div>
-      </div>
-      <button class="btn" data-id="${reminder.id}" data-title="${reminder.title}" data-time="${reminder.reminderTime}" data-completed="${reminder.completed}" ${reminder.completed ? "disabled" : ""}>
-        ${reminder.completed ? "Completed" : "Mark done"}
-      </button>
-    `;
+
+    const reminderInfo = document.createElement("div");
+    const title = document.createElement("strong");
+    title.textContent = reminder.title;
+
+    const time = document.createElement("div");
+    time.className = "muted";
+    time.textContent = new Date(reminder.reminderTime).toLocaleString();
+
+    reminderInfo.appendChild(title);
+    reminderInfo.appendChild(time);
+
+    const button = document.createElement("button");
+    button.className = "btn";
+    button.dataset.id = String(reminder.id);
+    button.dataset.title = reminder.title;
+    button.dataset.time = reminder.reminderTime;
+    button.dataset.completed = String(reminder.completed);
+    button.textContent = reminder.completed ? "Completed" : "Mark done";
+    button.disabled = reminder.completed;
+
+    li.appendChild(reminderInfo);
+    li.appendChild(button);
     reminderList.appendChild(li);
   });
 
