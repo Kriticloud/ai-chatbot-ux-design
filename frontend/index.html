@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elderly Companion Chatbot</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app-header">
+        <h1>Elderly Companion Chatbot</h1>
+        <p>Friendly support, reminders, and daily conversation.</p>
+      </header>
+
+      <section class="status-card">
+        <button id="statusBtn">Check backend status</button>
+        <p id="statusText">Status: unknown</p>
+      </section>
+
+      <section class="train-card">
+        <h2>Train chatbot (custom Q&A)</h2>
+        <form id="trainForm" class="train-form">
+          <input id="questionInput" type="text" placeholder="Question to teach (e.g., what is my clinic number?)" required />
+          <input id="answerInput" type="text" placeholder="Answer chatbot should give" required />
+          <button type="submit">Train</button>
+        </form>
+        <p id="trainStatus" class="muted">No training submitted yet.</p>
+      </section>
+
+      <section class="chat-card">
+        <div id="messages" class="messages" aria-live="polite"></div>
+        <form id="chatForm" class="composer">
+          <label for="messageInput" class="sr-only">Type a message</label>
+          <input
+            id="messageInput"
+            name="message"
+            type="text"
+            placeholder="Type a message (e.g., hello, medicine reminder)"
+            required
+          />
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
