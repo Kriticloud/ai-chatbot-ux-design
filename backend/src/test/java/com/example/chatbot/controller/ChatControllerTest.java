@@ -50,5 +50,10 @@ class ChatControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.error").value("Validation failed"))
                 .andExpect(jsonPath("$.details[0]").value("message: message is required"));
+    void chatEndpointRejectsBlankMessage() throws Exception {
+        mockMvc.perform(post("/api/chat")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"message\":\"\"}"))
+                .andExpect(status().isBadRequest());
     }
 }

@@ -74,6 +74,8 @@ Then open `http://localhost:5173`.
 
 ### Run tests
 
+### Run tests
+
 ```bash
 cd backend
 mvn test
