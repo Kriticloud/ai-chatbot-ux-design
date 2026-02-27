@@ -1,11 +1,13 @@
 package com.example.chatbot.controller;
 
+import com.example.chatbot.dto.ChatRequest;
+import com.example.chatbot.dto.ChatResponse;
+import com.example.chatbot.dto.StatusResponse;
+import com.example.chatbot.dto.ChatHistoryMessageResponse;
 import com.example.chatbot.model.User;
 import com.example.chatbot.service.ChatService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import java.util.List;
-import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,22 +27,20 @@ public class ChatController {
     }
 
     @GetMapping("/status")
-    public ResponseEntity<Map<String, String>> status() {
-        return ResponseEntity.ok(Map.of("status", "UP", "message", "Companion chatbot is running 🌿"));
+    public ResponseEntity<StatusResponse> status() {
+        return ResponseEntity.ok(new StatusResponse("UP"));
     }
 
     @PostMapping("/chat")
-    public ResponseEntity<ChatService.ChatResponse> chat(
+    public ResponseEntity<ChatResponse> chat(
         @AuthenticationPrincipal User user,
         @Valid @RequestBody ChatRequest req
     ) {
-        return ResponseEntity.ok(chatService.chat(user, req.message()));
+        return ResponseEntity.ok(chatService.chat(user, req.getMessage()));
     }
 
     @GetMapping("/chat/history")
-    public ResponseEntity<List<ChatService.MessageDto>> history(@AuthenticationPrincipal User user) {
+    public ResponseEntity<List<ChatHistoryMessageResponse>> history(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok(chatService.getHistory(user));
     }
-
-    record ChatRequest(@NotBlank String message) {}
 }

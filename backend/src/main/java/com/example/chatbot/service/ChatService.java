@@ -1,8 +1,11 @@
 package com.example.chatbot.service;
 
+import com.example.chatbot.dto.ChatHistoryMessageResponse;
+import com.example.chatbot.dto.ChatResponse;
 import com.example.chatbot.model.Message;
 import com.example.chatbot.model.User;
 import com.example.chatbot.repository.MessageRepository;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -30,54 +33,54 @@ public class ChatService {
     );
 
     private static final Map<String, String> KEYWORD_RESPONSES = Map.of(
-        "hello",   "Hello there! Wonderful to see you. How are you feeling today? 🌸",
-        "hi",      "Hi! It's so good to chat with you. What's on your mind?",
-        "lonely",  "I'm right here with you. You're never alone when we can talk like this. 💙",
-        "sad",     "I'm sorry you're feeling sad. Would you like to tell me what's going on?",
-        "happy",   "That makes my day to hear! What's bringing you joy today? 😄",
-        "tired",   "Rest is so important. Have you had a chance to relax today?",
-        "remind",  "I can help with reminders! Head over to the Reminders tab to set one up.",
+        "hello", "Hello there! Wonderful to see you. How are you feeling today? 🌸",
+        "hi", "Hi! It's so good to chat with you. What's on your mind?",
+        "lonely", "I'm right here with you. You're never alone when we can talk like this. 💙",
+        "sad", "I'm sorry you're feeling sad. Would you like to tell me what's going on?",
+        "happy", "That makes my day to hear! What's bringing you joy today? 😄",
+        "tired", "Rest is so important. Have you had a chance to relax today?",
+        "remind", "I can help with reminders! Head over to the Reminders tab to set one up.",
         "medication", "Taking your medication on time is so important. Don't forget to set a reminder!"
     );
 
     @Transactional
     public ChatResponse chat(User user, String userMessage) {
-        Message u = new Message();
-        u.setUser(user);
-        u.setRole("user");
-        u.setContent(userMessage);
-        messageRepository.save(u);
+        Message userMsg = new Message();
+        userMsg.setUser(user);
+        userMsg.setRole("user");
+        userMsg.setContent(userMessage);
+        messageRepository.save(userMsg);
 
         String botResponse = generateResponse(userMessage);
 
-        Message b = new Message();
-        b.setUser(user);
-        b.setRole("bot");
-        b.setContent(botResponse);
-        messageRepository.save(b);
+        Message botMsg = new Message();
+        botMsg.setUser(user);
+        botMsg.setRole("bot");
+        botMsg.setContent(botResponse);
+        messageRepository.save(botMsg);
 
         return new ChatResponse(botResponse);
     }
 
-    public List<MessageDto> getHistory(User user) {
+    public List<ChatHistoryMessageResponse> getHistory(User user) {
         return messageRepository.findByUserIdOrderByCreatedAtAsc(user.getId())
-            .stream().map(MessageDto::from).toList();
+            .stream()
+            .map(m -> new ChatHistoryMessageResponse(
+                m.getId(),
+                m.getRole(),
+                m.getContent(),
+                LocalDateTime.ofInstant(m.getCreatedAt().toInstant(), m.getCreatedAt().getOffset())
+            ))
+            .toList();
     }
 
     private String generateResponse(String input) {
         String lower = input.toLowerCase();
         for (var entry : KEYWORD_RESPONSES.entrySet()) {
-            if (lower.contains(entry.getKey())) return entry.getValue();
+            if (lower.contains(entry.getKey())) {
+                return entry.getValue();
+            }
         }
         return RESPONSES.get(new Random().nextInt(RESPONSES.size()));
-    }
-
-    public record ChatResponse(String response) {}
-    public record ChatRequest(String message)   {}
-
-    public record MessageDto(Long id, String role, String content, String createdAt) {
-        static MessageDto from(Message m) {
-            return new MessageDto(m.getId(), m.getRole(), m.getContent(), m.getCreatedAt().toString());
-        }
     }
 }
