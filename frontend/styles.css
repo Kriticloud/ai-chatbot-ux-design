@@ -1,16 +1,13 @@
 :root {
-  --bg: linear-gradient(160deg, #eef4ff 0%, #f8fbff 45%, #f2f8f5 100%);
+  --bg: #f7fafc;
   --surface: #ffffff;
   --primary: #2f80ed;
-  --primary-strong: #1e62bb;
   --text: #1f2937;
-  --muted: #5b6474;
-  --border: #dde5f2;
-  --shadow: 0 14px 40px rgba(30, 50, 90, 0.08);
+  --muted: #4b5563;
+  --border: #d1d5db;
 }
 
 * { box-sizing: border-box; }
-
 body {
   margin: 0;
   font-family: Inter, Arial, sans-serif;
@@ -19,171 +16,51 @@ body {
 }
 
 .app {
-  max-width: 1100px;
-  margin: 28px auto;
-  padding: 0 16px 20px;
+  max-width: 840px;
+  margin: 24px auto;
+  padding: 0 16px;
 }
 
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-}
-
-.app-header {
-  padding: 20px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.eyebrow {
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.75rem;
-  color: var(--primary);
-  font-weight: 700;
-}
-
-.app-header h1 {
-  margin: 6px 0;
-  font-size: 1.8rem;
-}
-
-.subtitle {
-  margin: 0;
-  color: var(--muted);
-}
-
-.status-inline {
-  background: #eef5ff;
-  color: var(--primary-strong);
-  border: 1px solid #d8e7ff;
-  border-radius: 999px;
-  padding: 8px 12px;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.layout-grid {
-  display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 16px;
-}
-
-.left-column {
-  display: grid;
-  gap: 16px;
-  align-content: start;
-}
+.app-header h1 { margin-bottom: 4px; }
+.app-header p { margin-top: 0; color: var(--muted); }
 
 .status-card,
-.train-card,
-.reminder-card,
 .chat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   padding: 16px;
+  margin-bottom: 16px;
 }
 
-h2 {
-  margin: 0 0 8px;
-  font-size: 1.1rem;
-}
-
-.muted {
-  color: var(--muted);
-  margin-top: 0;
-}
-
-.btn {
+button {
   background: var(--primary);
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 10px 14px;
   cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s ease, transform 0.05s ease;
-}
-
-.btn:hover { background: var(--primary-strong); }
-.btn:active { transform: translateY(1px); }
-
-.btn:disabled {
-  background: #9aa9c2;
-  cursor: not-allowed;
-}
-
-.stack-form {
-  display: grid;
-  gap: 8px;
-}
-
-.reminder-list {
-  list-style: none;
-  padding: 0;
-  margin-top: 12px;
-  display: grid;
-  gap: 8px;
-}
-
-.reminder-item {
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  align-items: center;
-  background: #fbfdff;
-}
-
-.chat-card {
-  display: flex;
-  flex-direction: column;
-  min-height: 660px;
-}
-
-.chat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 10px;
 }
 
 .messages {
-  flex: 1;
   min-height: 320px;
-  max-height: 65vh;
+  max-height: 50vh;
   overflow: auto;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 12px;
   margin-bottom: 12px;
-  background: #f9fbff;
+  background: #fcfdff;
 }
 
 .message {
   margin: 8px 0;
   padding: 10px 12px;
-  border-radius: 12px;
-  max-width: 82%;
-  line-height: 1.4;
+  border-radius: 10px;
+  max-width: 80%;
 }
-
-.message.user {
-  background: #dbeafe;
-  margin-left: auto;
-  border-bottom-right-radius: 4px;
-}
-
-.message.bot {
-  background: #ecf1f8;
-  border-bottom-left-radius: 4px;
-}
+.message.user { background: #dbeafe; margin-left: auto; }
+.message.bot { background: #eef2f7; }
 
 .composer {
   display: flex;
@@ -191,17 +68,11 @@ h2 {
 }
 
 input {
-  width: 100%;
+  flex: 1;
   min-height: 42px;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 10px;
-  font: inherit;
-}
-
-input:focus {
-  outline: 2px solid #c5dcff;
-  border-color: #9dc3ff;
 }
 
 .sr-only {
@@ -213,11 +84,4 @@ input:focus {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-}
-
-@media (max-width: 900px) {
-  .layout-grid { grid-template-columns: 1fr; }
-  .chat-card { min-height: 520px; }
-  .status-inline { align-self: flex-start; }
-  .app-header { flex-direction: column; align-items: flex-start; }
 }
