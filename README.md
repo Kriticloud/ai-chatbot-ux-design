@@ -13,6 +13,10 @@ A complete starter package for an **Elderly Companion Chatbot** project, includi
 │   ├── src/main/java/com/example/chatbot
 │   ├── src/main/resources
 │   └── src/test/java/com/example/chatbot
+├── frontend/                           # Browser UI
+│   ├── index.html
+│   ├── app.js
+│   └── styles.css
 ├── CHATBOT_PROJECT_OVERVIEW.md
 ├── USER_PERSONAS_RESEARCH.md
 ├── CONVERSATION_FLOWS.md
@@ -57,6 +61,19 @@ cd backend
 mvn spring-boot:run
 ```
 
+### Run frontend
+
+In a new terminal:
+
+```bash
+cd frontend
+npm start
+```
+
+Then open `http://localhost:5173`.
+
+### Run tests
+
 ### Run tests
 
 ```bash
@@ -77,4 +94,32 @@ Use these files to drive product and UX decisions:
 ## Complete-Project Roadmap
 
 If your goal is to fully ship this project (not just a demo backend), follow `COMPLETE_PROJECT_PLAN.md` for a phase-by-phase implementation plan covering frontend, database, AI safety, auth, testing, and deployment.
+
+
+## What new things are needed to make the app fully work?
+
+To move from a backend-only starter to a working product that users can use daily, you still need:
+
+1. **Frontend app** (Vue + chat UI) connected to `/api/chat` and `/api/status`.
+2. **Database** (PostgreSQL + JPA + Flyway) for users, messages, and reminders.
+3. **Reminder APIs** (`/api/reminders`) with CRUD support.
+4. **Authentication** (Spring Security + JWT) for private user data.
+5. **Deployment setup** (frontend hosting + backend hosting + managed DB + env secrets).
+
+### Quick backend verification commands
+
+```bash
+# 1) Start backend
+cd backend
+mvn spring-boot:run
+
+# 2) Verify app status
+curl http://localhost:8080/api/status
+
+# 3) Verify chatbot response
+curl -X POST http://localhost:8080/api/chat   -H "Content-Type: application/json"   -d '{"message":"hello"}'
+
+# 4) Verify runtime health endpoint
+curl http://localhost:8080/actuator/health
+```
 

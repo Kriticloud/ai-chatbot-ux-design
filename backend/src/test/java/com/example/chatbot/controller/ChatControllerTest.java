@@ -27,6 +27,13 @@ class ChatControllerTest {
     }
 
     @Test
+    void actuatorHealthEndpointReturnsUp() throws Exception {
+        mockMvc.perform(get("/actuator/health"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("UP"));
+    }
+
+    @Test
     void chatEndpointReturnsReply() throws Exception {
         mockMvc.perform(post("/api/chat")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -36,6 +43,13 @@ class ChatControllerTest {
     }
 
     @Test
+    void chatEndpointRejectsBlankMessageWithFriendlyErrorBody() throws Exception {
+        mockMvc.perform(post("/api/chat")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"message\":\"\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.error").value("Validation failed"))
+                .andExpect(jsonPath("$.details[0]").value("message: message is required"));
     void chatEndpointRejectsBlankMessage() throws Exception {
         mockMvc.perform(post("/api/chat")
                 .contentType(MediaType.APPLICATION_JSON)
