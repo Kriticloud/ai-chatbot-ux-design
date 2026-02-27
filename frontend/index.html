@@ -3,70 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elderly Companion Chatbot</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>AI Companion Chatbot</title>
   </head>
   <body>
-    <main class="app">
-      <header class="app-header card">
-        <div>
-          <p class="eyebrow">Companion Care Assistant</p>
-          <h1>Elderly Companion Chatbot</h1>
-          <p class="subtitle">Friendly support, reminders, and daily conversation in one place.</p>
-        </div>
-        <div class="status-inline" id="statusText">Status: unknown</div>
-      </header>
-
-      <section class="layout-grid">
-        <aside class="left-column">
-          <section class="card status-card">
-            <h2>Connection</h2>
-            <p class="muted">Check if backend service is active.</p>
-            <button id="statusBtn" class="btn">Check backend status</button>
-          </section>
-
-          <section class="card train-card">
-            <h2>Train chatbot</h2>
-            <p class="muted">Teach custom Q&A for personalized responses.</p>
-            <form id="trainForm" class="stack-form">
-              <label for="questionInput" class="sr-only">Question to teach</label>
-              <input id="questionInput" type="text" placeholder="Question to teach" required />
-              <label for="answerInput" class="sr-only">Answer</label>
-              <input id="answerInput" type="text" placeholder="Answer chatbot should give" required />
-              <button type="submit" class="btn">Train</button>
-            </form>
-            <p id="trainStatus" class="muted">No training submitted yet.</p>
-          </section>
-
-          <section class="card reminder-card">
-            <h2>Reminders</h2>
-            <p class="muted">Create and complete reminders.</p>
-            <form id="reminderForm" class="stack-form">
-              <label for="reminderTitle" class="sr-only">Reminder title</label>
-              <input id="reminderTitle" type="text" placeholder="Reminder title" required />
-              <label for="reminderTime" class="sr-only">Reminder time</label>
-              <input id="reminderTime" type="datetime-local" required />
-              <button type="submit" class="btn">Add Reminder</button>
-            </form>
-            <ul id="reminderList" class="reminder-list"></ul>
-          </section>
-        </aside>
-
-        <section class="card chat-card">
-          <div class="chat-header">
-            <h2>Conversation</h2>
-            <span class="muted">Recent history available</span>
-          </div>
-          <div id="messages" class="messages" aria-live="polite"></div>
-          <form id="chatForm" class="composer">
-            <label for="messageInput" class="sr-only">Type a message</label>
-            <input id="messageInput" name="message" type="text" placeholder="Type a message" required />
-            <button type="submit" class="btn">Send</button>
-          </form>
-        </section>
-      </section>
-    </main>
-
-    <script src="app.js"></script>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
