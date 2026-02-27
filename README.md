@@ -73,3 +73,8 @@ Use these files to drive product and UX decisions:
 - `WIREFRAMES.md` and `MOBILE_DESKTOP_MOCKUPS.md` for interface direction
 - `DESIGN_SYSTEM.md` for reusable visual standards
 - `PROTOTYPE_SPECIFICATIONS.md` for build-ready implementation specs
+
+## Complete-Project Roadmap
+
+If your goal is to fully ship this project (not just a demo backend), follow `COMPLETE_PROJECT_PLAN.md` for a phase-by-phase implementation plan covering frontend, database, AI safety, auth, testing, and deployment.
+
