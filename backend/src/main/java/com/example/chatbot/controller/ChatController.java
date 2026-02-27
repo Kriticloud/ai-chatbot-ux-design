@@ -31,6 +31,14 @@ public class ChatController {
 
     @GetMapping("/status")
     public ResponseEntity<StatusResponse> status() {
-        return ResponseEntity.ok(new StatusResponse("ok"));
+        return ResponseEntity.ok(new StatusResponse("UP"));
+    }
+
+    @PostMapping("/chat")
+    public ResponseEntity<ChatResponse> chat(
+        @AuthenticationPrincipal User user,
+        @Valid @RequestBody ChatRequest req
+    ) {
+        return ResponseEntity.ok(chatService.chat(user, req.getMessage()));
     }
 }

@@ -17,7 +17,6 @@ import java.time.OffsetDateTime;
 @Entity
 @Table(name = "reminders")
 public class Reminder {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
