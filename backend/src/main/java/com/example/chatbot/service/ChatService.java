@@ -2,6 +2,7 @@ package com.example.chatbot.service;
 
 import java.util.Locale;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ChatService {

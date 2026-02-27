@@ -1,7 +1,9 @@
 package com.example.chatbot.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -20,17 +22,25 @@ class ChatControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void statusEndpointReturnsOk() throws Exception {
+    void statusEndpointReturnsUp() throws Exception {
         mockMvc.perform(get("/api/status"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value("ok"));
+                .andExpect(jsonPath("$.status").value("UP"));
     }
 
     @Test
-    void actuatorHealthEndpointReturnsUp() throws Exception {
-        mockMvc.perform(get("/actuator/health"))
+    void authRegisterAndLoginWork() throws Exception {
+        mockMvc.perform(post("/api/auth/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"Demo\",\"email\":\"demo@example.com\",\"password\":\"secret123\"}"))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.token").isNotEmpty());
+
+        mockMvc.perform(post("/api/auth/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"email\":\"demo@example.com\",\"password\":\"secret123\"}"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value("UP"));
+                .andExpect(jsonPath("$.token").isNotEmpty());
     }
 
     @Test
