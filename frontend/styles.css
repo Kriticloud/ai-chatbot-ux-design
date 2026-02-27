@@ -25,7 +25,8 @@ body {
 .app-header p { margin-top: 0; color: var(--muted); }
 
 .status-card,
-.chat-card {
+.chat-card,
+.panel {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -84,4 +85,18 @@ input {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+
+.reminders-list {
+  margin: 12px 0 0;
+  padding-left: 20px;
+}
+
+.reminder-item {
+  margin: 6px 0;
+}
+
+.reminder-item.error {
+  color: #b91c1c;
 }
