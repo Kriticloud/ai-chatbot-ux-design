@@ -22,7 +22,7 @@
           <section class="card status-card">
             <h2>Connection</h2>
             <p class="muted">Check if backend service is active.</p>
-            <button id="statusBtn" class="btn">Check backend status</button>
+            <button id="statusBtn" class="btn btn-full">Check backend status</button>
           </section>
 
           <section class="card train-card">
@@ -30,12 +30,12 @@
             <p class="muted">Teach custom Q&A for personalized responses.</p>
             <form id="trainForm" class="stack-form">
               <label for="questionInput" class="sr-only">Question to teach</label>
-              <input id="questionInput" type="text" placeholder="Question to teach" required />
+              <input id="questionInput" type="text" placeholder="What should I ask?" required />
               <label for="answerInput" class="sr-only">Answer</label>
-              <input id="answerInput" type="text" placeholder="Answer chatbot should give" required />
-              <button type="submit" class="btn">Train</button>
+              <input id="answerInput" type="text" placeholder="What should the bot reply?" required />
+              <button type="submit" class="btn btn-full">Train</button>
             </form>
-            <p id="trainStatus" class="muted">No training submitted yet.</p>
+            <p id="trainStatus" class="muted feedback-pill">No training submitted yet.</p>
           </section>
 
           <section class="card reminder-card">
@@ -43,10 +43,10 @@
             <p class="muted">Create and complete reminders.</p>
             <form id="reminderForm" class="stack-form">
               <label for="reminderTitle" class="sr-only">Reminder title</label>
-              <input id="reminderTitle" type="text" placeholder="Reminder title" required />
+              <input id="reminderTitle" type="text" placeholder="e.g. Take afternoon medicine" required />
               <label for="reminderTime" class="sr-only">Reminder time</label>
               <input id="reminderTime" type="datetime-local" required />
-              <button type="submit" class="btn">Add Reminder</button>
+              <button type="submit" class="btn btn-full">Add reminder</button>
             </form>
             <ul id="reminderList" class="reminder-list"></ul>
           </section>
