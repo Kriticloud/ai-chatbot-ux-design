@@ -5,6 +5,8 @@ const statusText = document.getElementById("statusText");
 const chatForm = document.getElementById("chatForm");
 const messageInput = document.getElementById("messageInput");
 const messages = document.getElementById("messages");
+const loadRemindersBtn = document.getElementById("loadRemindersBtn");
+const remindersList = document.getElementById("remindersList");
 
 function appendMessage(text, role) {
   const el = document.createElement("div");
@@ -50,5 +52,61 @@ chatForm.addEventListener("submit", async (event) => {
     appendMessage("I cannot reach the server right now. Please try again.", "bot");
   }
 });
+
+function buildReminderListItem(reminder) {
+  const li = document.createElement("li");
+  li.className = "reminder-item";
+
+  const title = document.createElement("strong");
+  title.textContent = reminder.title || "Untitled reminder";
+
+  const time = document.createElement("span");
+  time.textContent = reminder.remindAt
+    ? ` — ${new Date(reminder.remindAt).toLocaleString()}`
+    : " — time not set";
+
+  li.append(title, time);
+  return li;
+}
+
+function renderReminders(reminders) {
+  if (!remindersList) {
+    return;
+  }
+
+  remindersList.replaceChildren();
+  reminders.forEach((reminder) => {
+    remindersList.appendChild(buildReminderListItem(reminder));
+  });
+}
+
+if (loadRemindersBtn) {
+  loadRemindersBtn.addEventListener("click", async () => {
+    loadRemindersBtn.disabled = true;
+    loadRemindersBtn.textContent = "Loading...";
+
+    try {
+      const res = await fetch(`${API_BASE}/api/reminders`);
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to load reminders");
+      }
+
+      renderReminders(data);
+    } catch (error) {
+      renderReminders([]);
+      if (remindersList) {
+        const errorItem = document.createElement("li");
+        errorItem.className = "reminder-item error";
+        errorItem.textContent = "Unable to load reminders right now.";
+        remindersList.appendChild(errorItem);
+      }
+    } finally {
+      loadRemindersBtn.disabled = false;
+      loadRemindersBtn.textContent = "Load reminders";
+    }
+  });
+}
 
 appendMessage("Hello! I am here for companionship and daily support.", "bot");
