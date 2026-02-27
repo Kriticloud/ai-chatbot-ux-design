@@ -10,29 +10,31 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "messages")
 public class Message {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-    @NotBlank
+
     @Column(nullable = false, length = 10)
     private String role;
-    @NotBlank
+
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private OffsetDateTime createdAt = OffsetDateTime.now();
+
+    @Column(name = "created_at", nullable = false)
+    private OffsetDateTime createdAt;
 
     @PrePersist
-    void onCreate() { if (createdAt == null) createdAt = OffsetDateTime.now(); }
+    void onCreate() { createdAt = OffsetDateTime.now(); }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

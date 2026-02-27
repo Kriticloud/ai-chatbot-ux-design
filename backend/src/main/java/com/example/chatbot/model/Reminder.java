@@ -11,7 +11,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
 
@@ -21,31 +20,36 @@ public class Reminder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-    @NotBlank
-    @Column(nullable = false, length = 255)
+
+    @Column(nullable = false)
     private String title;
+
     @Column(name = "reminder_time")
     private LocalTime reminderTime;
-    @Column(nullable = false)
-    private Boolean done = false;
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private OffsetDateTime createdAt = OffsetDateTime.now();
+
+    @Column(name = "done", nullable = false)
+    private Boolean done;
+
+    @Column(name = "created_at", nullable = false)
+    private OffsetDateTime createdAt;
+
     @Column(name = "updated_at", nullable = false)
-    private OffsetDateTime updatedAt = OffsetDateTime.now();
+    private OffsetDateTime updatedAt;
 
     @PrePersist
     void onCreate() {
         OffsetDateTime now = OffsetDateTime.now();
-        if (createdAt == null) createdAt = now;
-        if (done == null) done = false;
+        createdAt = now;
         updatedAt = now;
+        if (done == null) done = false;
     }
 
     @PreUpdate
-    public void onUpdate() { this.updatedAt = OffsetDateTime.now(); }
+    void onUpdate() { updatedAt = OffsetDateTime.now(); }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
