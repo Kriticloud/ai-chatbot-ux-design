@@ -6,6 +6,7 @@ import com.example.chatbot.dto.StatusResponse;
 import com.example.chatbot.service.ChatService;
 import javax.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,14 @@ public class ChatController {
 
     @GetMapping("/status")
     public ResponseEntity<StatusResponse> status() {
-        return ResponseEntity.ok(new StatusResponse("ok"));
+        return ResponseEntity.ok(new StatusResponse("UP"));
+    }
+
+    @PostMapping("/chat")
+    public ResponseEntity<ChatResponse> chat(
+        @AuthenticationPrincipal User user,
+        @Valid @RequestBody ChatRequest req
+    ) {
+        return ResponseEntity.ok(chatService.chat(user, req.getMessage()));
     }
 }
