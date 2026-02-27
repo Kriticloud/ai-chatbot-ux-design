@@ -31,11 +31,6 @@ A complete starter package for an **Elderly Companion Chatbot** project, includi
 ### Endpoints
 - `GET /api/status` — health endpoint
 - `POST /api/chat` — chatbot response endpoint
-- `POST /api/train` — teach chatbot a custom question+answer pair
-- `GET /api/messages` — fetch recent chat history
-- `POST /api/reminders` — create reminder
-- `GET /api/reminders` — list reminders
-- `PATCH /api/reminders/{id}` — update reminder (mark complete)
 
 Example request:
 
@@ -76,6 +71,8 @@ npm start
 ```
 
 Then open `http://localhost:5173`.
+
+### Run tests
 
 ### Run tests
 
@@ -126,51 +123,3 @@ curl -X POST http://localhost:8080/api/chat   -H "Content-Type: application/json
 curl http://localhost:8080/actuator/health
 ```
 
-
-
-## How to train your chatbot
-
-This project now supports lightweight training through a custom Q&A endpoint.
-
-### Option A: train from frontend
-1. Start backend (`cd backend && mvn spring-boot:run`).
-2. Start frontend (`cd frontend && npm start`).
-3. Open `http://localhost:5173`.
-4. In **Train chatbot (custom Q&A)**, enter a question and answer, then click **Train**.
-5. Ask the same question in chat and the bot will return your trained answer.
-
-### Option B: train with API
-
-```bash
-curl -X POST http://localhost:8080/api/train \
-  -H "Content-Type: application/json" \
-  -d '{"question":"what is my clinic number?","answer":"Your clinic number is +1-555-0100."}'
-
-curl -X POST http://localhost:8080/api/chat \
-  -H "Content-Type: application/json" \
-  -d '{"message":"what is my clinic number?"}'
-```
-
-> Note: current training is in-memory (prototype). Restarting backend clears learned Q&A.
-
-
-## New fully-fledged features added
-
-The app now includes practical product features beyond basic chat:
-- **Persistent reminders** with create/list/update APIs using JPA + H2 file database.
-- **Recent chat history** endpoint so conversations are not just ephemeral in the UI.
-- **Frontend reminders panel** to add and complete reminders.
-
-### Reminder API example
-
-```bash
-curl -X POST http://localhost:8080/api/reminders \
-  -H "Content-Type: application/json" \
-  -d '{"title":"Take medicine","reminderTime":"2026-02-27T21:30:00","completed":false}'
-
-curl http://localhost:8080/api/reminders
-```
-
-### Data persistence note
-- Local data is stored in H2 file DB (`./backend/data/chatbotdb*`).
-- Restarting server keeps reminders/history unless the DB files are removed.

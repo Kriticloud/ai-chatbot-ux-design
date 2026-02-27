@@ -18,32 +18,17 @@
         <p id="statusText">Status: unknown</p>
       </section>
 
-      <section class="train-card">
-        <h2>Train chatbot (custom Q&A)</h2>
-        <form id="trainForm" class="train-form">
-          <input id="questionInput" type="text" placeholder="Question to teach" required />
-          <input id="answerInput" type="text" placeholder="Answer chatbot should give" required />
-          <button type="submit">Train</button>
-        </form>
-        <p id="trainStatus" class="muted">No training submitted yet.</p>
-      </section>
-
-      <section class="reminder-card">
-        <h2>Reminders</h2>
-        <form id="reminderForm" class="train-form">
-          <input id="reminderTitle" type="text" placeholder="Reminder title" required />
-          <input id="reminderTime" type="datetime-local" required />
-          <button type="submit">Add Reminder</button>
-        </form>
-        <ul id="reminderList" class="reminder-list"></ul>
-      </section>
-
       <section class="chat-card">
-        <h2>Chat</h2>
         <div id="messages" class="messages" aria-live="polite"></div>
         <form id="chatForm" class="composer">
           <label for="messageInput" class="sr-only">Type a message</label>
-          <input id="messageInput" name="message" type="text" placeholder="Type a message" required />
+          <input
+            id="messageInput"
+            name="message"
+            type="text"
+            placeholder="Type a message (e.g., hello, medicine reminder)"
+            required
+          />
           <button type="submit">Send</button>
         </form>
       </section>
