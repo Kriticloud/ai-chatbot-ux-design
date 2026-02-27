@@ -25,7 +25,6 @@ body {
 .app-header p { margin-top: 0; color: var(--muted); }
 
 .status-card,
-.train-card,
 .chat-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -41,16 +40,6 @@ button {
   border-radius: 8px;
   padding: 10px 14px;
   cursor: pointer;
-}
-
-.train-form {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-}
-
-.muted {
-  color: var(--muted);
 }
 
 .messages {

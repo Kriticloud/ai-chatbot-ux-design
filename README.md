@@ -31,7 +31,6 @@ A complete starter package for an **Elderly Companion Chatbot** project, includi
 ### Endpoints
 - `GET /api/status` — health endpoint
 - `POST /api/chat` — chatbot response endpoint
-- `POST /api/train` — teach chatbot a custom question+answer pair
 
 Example request:
 
@@ -72,6 +71,8 @@ npm start
 ```
 
 Then open `http://localhost:5173`.
+
+### Run tests
 
 ### Run tests
 
@@ -122,29 +123,3 @@ curl -X POST http://localhost:8080/api/chat   -H "Content-Type: application/json
 curl http://localhost:8080/actuator/health
 ```
 
-
-
-## How to train your chatbot
-
-This project now supports lightweight training through a custom Q&A endpoint.
-
-### Option A: train from frontend
-1. Start backend (`cd backend && mvn spring-boot:run`).
-2. Start frontend (`cd frontend && npm start`).
-3. Open `http://localhost:5173`.
-4. In **Train chatbot (custom Q&A)**, enter a question and answer, then click **Train**.
-5. Ask the same question in chat and the bot will return your trained answer.
-
-### Option B: train with API
-
-```bash
-curl -X POST http://localhost:8080/api/train \
-  -H "Content-Type: application/json" \
-  -d '{"question":"what is my clinic number?","answer":"Your clinic number is +1-555-0100."}'
-
-curl -X POST http://localhost:8080/api/chat \
-  -H "Content-Type: application/json" \
-  -d '{"message":"what is my clinic number?"}'
-```
-
-> Note: current training is in-memory (prototype). Restarting backend clears learned Q&A.

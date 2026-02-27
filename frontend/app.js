@@ -5,10 +5,6 @@ const statusText = document.getElementById("statusText");
 const chatForm = document.getElementById("chatForm");
 const messageInput = document.getElementById("messageInput");
 const messages = document.getElementById("messages");
-const trainForm = document.getElementById("trainForm");
-const questionInput = document.getElementById("questionInput");
-const answerInput = document.getElementById("answerInput");
-const trainStatus = document.getElementById("trainStatus");
 
 function appendMessage(text, role) {
   const el = document.createElement("div");
@@ -26,37 +22,6 @@ statusBtn.addEventListener("click", async () => {
     statusText.textContent = `Status: ${data.status}`;
   } catch (error) {
     statusText.textContent = "Status: backend unreachable";
-  }
-});
-
-trainForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  const question = questionInput.value.trim();
-  const answer = answerInput.value.trim();
-  if (!question || !answer) return;
-
-  trainStatus.textContent = "Training...";
-
-  try {
-    const res = await fetch(`${API_BASE}/api/train`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question, answer })
-    });
-    const data = await res.json();
-
-    if (!res.ok) {
-      trainStatus.textContent = data.error || "Training failed";
-      return;
-    }
-
-    trainStatus.textContent = `Learned: "${data.learnedQuestion}"`;
-    questionInput.value = "";
-    answerInput.value = "";
-    appendMessage("Great! I learned a new response. Ask me now.", "bot");
-  } catch (error) {
-    trainStatus.textContent = "Training failed: backend unreachable";
   }
 });
 
