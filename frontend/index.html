@@ -8,62 +8,29 @@
   </head>
   <body>
     <main class="app">
-      <header class="app-header card">
-        <div>
-          <p class="eyebrow">Companion Care Assistant</p>
-          <h1>Elderly Companion Chatbot</h1>
-          <p class="subtitle">Friendly support, reminders, and daily conversation in one place.</p>
-        </div>
-        <div class="status-inline" id="statusText">Status: unknown</div>
+      <header class="app-header">
+        <h1>Elderly Companion Chatbot</h1>
+        <p>Friendly support, reminders, and daily conversation.</p>
       </header>
 
-      <section class="layout-grid">
-        <aside class="left-column">
-          <section class="card status-card">
-            <h2>Connection</h2>
-            <p class="muted">Check if backend service is active.</p>
-            <button id="statusBtn" class="btn btn-full">Check backend status</button>
-          </section>
+      <section class="status-card">
+        <button id="statusBtn">Check backend status</button>
+        <p id="statusText">Status: unknown</p>
+      </section>
 
-          <section class="card train-card">
-            <h2>Train chatbot</h2>
-            <p class="muted">Teach custom Q&A for personalized responses.</p>
-            <form id="trainForm" class="stack-form">
-              <label for="questionInput" class="sr-only">Question to teach</label>
-              <input id="questionInput" type="text" placeholder="What should I ask?" required />
-              <label for="answerInput" class="sr-only">Answer</label>
-              <input id="answerInput" type="text" placeholder="What should the bot reply?" required />
-              <button type="submit" class="btn btn-full">Train</button>
-            </form>
-            <p id="trainStatus" class="muted feedback-pill">No training submitted yet.</p>
-          </section>
-
-          <section class="card reminder-card">
-            <h2>Reminders</h2>
-            <p class="muted">Create and complete reminders.</p>
-            <form id="reminderForm" class="stack-form">
-              <label for="reminderTitle" class="sr-only">Reminder title</label>
-              <input id="reminderTitle" type="text" placeholder="e.g. Take afternoon medicine" required />
-              <label for="reminderTime" class="sr-only">Reminder time</label>
-              <input id="reminderTime" type="datetime-local" required />
-              <button type="submit" class="btn btn-full">Add reminder</button>
-            </form>
-            <ul id="reminderList" class="reminder-list"></ul>
-          </section>
-        </aside>
-
-        <section class="card chat-card">
-          <div class="chat-header">
-            <h2>Conversation</h2>
-            <span class="muted">Recent history available</span>
-          </div>
-          <div id="messages" class="messages" aria-live="polite"></div>
-          <form id="chatForm" class="composer">
-            <label for="messageInput" class="sr-only">Type a message</label>
-            <input id="messageInput" name="message" type="text" placeholder="Type a message" required />
-            <button type="submit" class="btn">Send</button>
-          </form>
-        </section>
+      <section class="chat-card">
+        <div id="messages" class="messages" aria-live="polite"></div>
+        <form id="chatForm" class="composer">
+          <label for="messageInput" class="sr-only">Type a message</label>
+          <input
+            id="messageInput"
+            name="message"
+            type="text"
+            placeholder="Type a message (e.g., hello, medicine reminder)"
+            required
+          />
+          <button type="submit">Send</button>
+        </form>
       </section>
     </main>
 
