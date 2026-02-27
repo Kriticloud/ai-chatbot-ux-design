@@ -3,6 +3,7 @@ package com.example.chatbot.config;
 import com.example.chatbot.auth.JwtAuthFilter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,9 +54,12 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
+        config.setAllowedOrigins(Arrays.stream(allowedOrigins.split(","))
+            .map(String::trim)
+            .filter(origin -> !origin.isEmpty())
+            .collect(Collectors.toList()));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
+        config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/api/**", config);
